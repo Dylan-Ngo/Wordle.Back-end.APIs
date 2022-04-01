@@ -2,13 +2,15 @@
 
 ## Group Members:
 
-Marco Andrade
+   Marco Andrade
 
-Javier Diaz
+   Javier Diaz
 
-Quauhtli Garcia-Brindis
+   Quauhtli Garcia-Brindis
 
-Dylan Ngo
+   Dylan Ngo
+
+## Run and test the services:
 
 1. Initialize the databases:
 
