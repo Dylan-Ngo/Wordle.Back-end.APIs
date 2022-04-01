@@ -10,16 +10,16 @@
 
     Dylan Ngo
 
-## Initialize the databases:
+1. Initialize the databases:
 
     ```
     ./bin/init.sh
     ```
 
-## Start the services:
+2. Start the services:
     ```
     foreman start
     ```
 
-## Test the API calls using curl, HTTPie, or 
+3. Test the API calls using curl, HTTPie, or 
    `http://localhost:5000/docs` and `http://localhost:5100/docs`
