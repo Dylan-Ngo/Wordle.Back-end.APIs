@@ -2,13 +2,13 @@
 
 ## Group Members:
 
-    Marco Andrade
+Marco Andrade
 
-    Javier Diaz
+Javier Diaz
 
-    Quauhtli Garcia-Brindis
+Quauhtli Garcia-Brindis
 
-    Dylan Ngo
+Dylan Ngo
 
 1. Initialize the databases:
 
