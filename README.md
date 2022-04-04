@@ -34,17 +34,17 @@
     
     * Use the following links with curl and HTTPie :
 
-        "Validate Guess" service `http://localhost:5000/validate?guess={your_guess}`
+        "Validate Guess" service: `http://localhost:5000/validate?guess={your_guess}`
 
-        e.g. `http://localhost:5000/validate?guess=apple`
+            e.g. `http://localhost:5000/validate?guess=apple`
 
-        "Check Guess against Answer" service `http://localhost:5100/games/{game_id}?guess={valid_guess}`
+        "Check Guess against Answer" service: `http://localhost:5100/games/{game_id}?guess={valid_guess}`
 
-        e.g. `http://localhost:5100/games/244?guess=apple`
+            e.g. `http://localhost:5100/games/244?guess=apple`
 
 
     * Automatic docs:
 
         "Validate Guess" service: `http://localhost:5000/docs` 
 
-        "Check Guess against Answer" service `http://localhost:5100/docs`
+        "Check Guess against Answer" service: `http://localhost:5100/docs`
