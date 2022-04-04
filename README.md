@@ -2,13 +2,13 @@
 
 ## Group Members:
 
-   Marco Andrade
+    Marco Andrade
 
-   Javier Diaz
+    Javier Diaz
 
-   Quauhtli Garcia-Brindis
+    Quauhtli Garcia-Brindis
 
-   Dylan Ngo
+    Dylan Ngo
 
 ## Run and test the services:
 
@@ -34,22 +34,22 @@
     
     * Use the following links with curl and HTTPie :
 
-    `http://localhost:5000/validate?guess={your_guess}` for "Validate Guess" service
+        `http://localhost:5000/validate?guess={your_guess}` for "Validate Guess" service
 
-    e.g. `http://localhost:5000/validate?guess=apple`
+        e.g. `http://localhost:5000/validate?guess=apple`
 
-    and
+        and
 
-    `http://localhost:5100/games/{game_id}?guess={valid_guess}` for "Check Guess against Answer" service
+        `http://localhost:5100/games/{game_id}?guess={valid_guess}` for "Check Guess against Answer" service
 
-    e.g. `http://localhost:5100/games/244?guess=apple`
+        e.g. `http://localhost:5100/games/244?guess=apple`
 
 
 
     * Automatic docs:
 
-    `http://localhost:5000/docs` for "Validate Guess" service 
+        `http://localhost:5000/docs` for "Validate Guess" service 
 
-    and 
+        and 
 
-    `http://localhost:5100/docs` for "Check Guess against Answer" service
+        `http://localhost:5100/docs` for "Check Guess against Answer" service
