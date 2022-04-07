@@ -32,15 +32,15 @@
 
 4. Test the services using curl, HTTPie, or automatic docs
     
-    * Use the following links with curl and HTTPie :
+    * Use the following request URLs with curl or HTTPie :
 
         "Validate Guess" service: `http://localhost:5000/validate?guess={your_guess}`
 
         e.g. `http://localhost:5000/validate?guess=apple`
 
-        "Check Guess against Answer" service: `http://localhost:5100/games/{game_id}?guess={valid_guess}`
+        "Check Guess against Answer" service: `http://localhost:5100/check?game_id={game_id}&guess={valid_guess}`
 
-        e.g. `http://localhost:5100/games/244?guess=apple`
+        e.g. `http://localhost:5100/check?game_id=244&guess=apple'`
 
 
     * Automatic docs:
