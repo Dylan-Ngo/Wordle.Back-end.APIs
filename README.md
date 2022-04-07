@@ -53,6 +53,6 @@
 
     * Automatic docs:
 
-        "Validate Guess" service: `http://localhost:5000/docs` 
+        - "Validate Guess" service: `http://localhost:5000/docs` 
 
-        "Check Guess against Answer" service: `http://localhost:5100/docs`
+        - "Check Guess against Answer" service: `http://localhost:5100/docs`
