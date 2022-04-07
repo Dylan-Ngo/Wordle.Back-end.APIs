@@ -3,7 +3,7 @@ import logging.config
 import sqlite3
 
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException, status
 from pydantic import BaseSettings
 
 
@@ -29,7 +29,7 @@ app = FastAPI()
 
 logging.config.fileConfig(settings.logging_config)
 
-@app.get("/games/{game_id}")
+@app.get("/check")
 def check_guess(
     game_id: int,
     guess : str,
@@ -39,13 +39,18 @@ def check_guess(
     for row in db.execute("SELECT * FROM answers WHERE game_id = ? LIMIT 1", [game_id]):
         answer = row['answer']
 
-    my_list = []
+    if not answer:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Game not found"
+        )
+
+    response_list = []
  
     for i in range(len(guess)):
         if guess[i] == answer[i]:
-            my_list.append({f"{guess[i]}" : "green"})
+            response_list.append({f"{guess[i]}" : "green"})
         elif guess[i] in answer:
-            my_list.append({f"{guess[i]}" : "yellow"})
+            response_list.append({f"{guess[i]}" : "yellow"})
         else:
-            my_list.append({f"{guess[i]}" : "gray"})
-    return {"response": my_list}
+            response_list.append({f"{guess[i]}" : "gray"})
+    return {"response": response_list}
