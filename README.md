@@ -34,7 +34,7 @@
     
     * Use the following request URLs with curl or HTTPie :
 
-        * "Validate Guess" service: 
+        - "Validate Guess" service: 
             
             * To validate a guess: `http://localhost:5000/validate?guess={your_guess}`
 
@@ -43,7 +43,7 @@
             * To remove a bad guess: `http://localhost:5000/remove_guess?guess={bad_word}`
         
 
-        * "Check Guess against Answer" service: 
+        - "Check Guess against Answer" service: 
 
             * To check a valid guess against the answer: `http://localhost:5100/check?game_id={game_id}&guess={valid_guess}`
 
