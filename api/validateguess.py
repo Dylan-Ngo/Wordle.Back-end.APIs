@@ -36,19 +36,21 @@ def validate_guess(
 ):
     cur = db.execute("SELECT * FROM words WHERE word = ?", [guess])
     words = cur.fetchall()
+
     if len(guess) != 5:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Word not five letters"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not five letters. Removed {guess}"
         )
     elif not guess.isascii() or not guess.isalpha():
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Word not letters only"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not entirely letters. Removed {guess}"
         )
     elif not words:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Word not found in the dictionary"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not found in dictionary. Removed {guess}"
         )
+    
     valid_guess = ""
     for word in words:
         valid_guess = word['word']
-    return {"response": f"{valid_guess} is valid"}
+    return {"response": f"Valid guess. Added {valid_guess} to check against answer"}
