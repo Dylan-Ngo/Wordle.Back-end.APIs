@@ -36,20 +36,20 @@
 
         * "Validate Guess" service: 
             
-            To validate a guess: `http://localhost:5000/validate?guess={your_guess}`
+            * To validate a guess: `http://localhost:5000/validate?guess={your_guess}`
 
-            To add a new/possible guess: `http://localhost:5000/add_guess?guess={new_word}`
+            * To add a new/possible guess: `http://localhost:5000/add_guess?guess={new_word}`
 
-            To remove a bad guess: `http://localhost:5000/remove_guess?guess={bad_word}`
+            * To remove a bad guess: `http://localhost:5000/remove_guess?guess={bad_word}`
         
 
         * "Check Guess against Answer" service: 
 
-            To check a valid guess against the answer: `http://localhost:5100/check?game_id={game_id}&guess={valid_guess}`
+            * To check a valid guess against the answer: `http://localhost:5100/check?game_id={game_id}&guess={valid_guess}`
 
-            To add a new/possible answer: `http://localhost:5100/add_answer?answer={new_answer}`
+            * To add a new/possible answer: `http://localhost:5100/add_answer?answer={new_answer}`
             
-            To update/change the answer of an existing game: `http://localhost:5100/change_answer?game_id={game_id}&new_answer={new_answer}`
+            * To update/change the answer of an existing game: `http://localhost:5100/change_answer?game_id={game_id}&new_answer={new_answer}`
 
     * Automatic docs:
 
