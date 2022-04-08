@@ -3,7 +3,8 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS answers;
 CREATE TABLE answers (
 	game_id INTEGER primary key,
-	answer VARCHAR
+	answer VARCHAR,
+	UNIQUE(answer)
 );
 INSERT INTO answers(answer) VALUES('cigar');
 INSERT INTO answers(answer) VALUES('rebut');
