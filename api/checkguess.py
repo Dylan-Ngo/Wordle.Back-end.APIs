@@ -32,7 +32,7 @@ logging.config.fileConfig(settings.logging_config)
 @app.get("/check")
 def check_guess(
     game_id: int,
-    guess : str,
+    guess: str,
     db: sqlite3.Connection = Depends(get_db)
 ):
     answer = ""
@@ -54,3 +54,37 @@ def check_guess(
         else:
             response_list.append({f"{guess[i]}" : "gray"})
     return {"response": response_list}
+
+@app.post("/add_answer", status_code=status.HTTP_201_CREATED)
+def add_asnwer(
+    answer: str,
+    db: sqlite3.Connection = Depends(get_db)
+):
+    try:
+        cur =  db.execute("INSERT INTO answers(answer) VALUES(?)", [answer])
+        db.commit()
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
+    new_answer_id = cur.lastrowid
+    return {"id": f"{new_answer_id}", "answer": f"{answer}"}
+
+@app.patch("/change_answer")
+def change_answer(
+    game_id: int,
+    new_answer: str,
+    db: sqlite3.Connection = Depends(get_db)
+):
+    cur =  db.execute("SELECT * FROM answers WHERE game_id = ? LIMIT 1", [game_id])
+    answers = cur.fetchall()
+
+    if not answers:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Game not found"
+        )
+
+    cur =  db.execute("UPDATE answers SET answer = ? WHERE game_id = ?", [new_answer, game_id])
+    db.commit()
+    return {"game_id": f"{game_id}", "answer": f"{new_answer}"}

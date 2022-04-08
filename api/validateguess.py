@@ -1,10 +1,12 @@
 import contextlib
 import logging.config
+from operator import ne
 import sqlite3
+from urllib import response
 
 
 from fastapi import FastAPI, Depends, HTTPException, status
-from pydantic import BaseSettings
+from pydantic import BaseModel, BaseSettings
 
 
 class Settings(BaseSettings):
@@ -39,18 +41,52 @@ def validate_guess(
 
     if len(guess) != 5:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not five letters. Removed {guess}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not five letters."
         )
     elif not guess.isascii() or not guess.isalpha():
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not entirely letters. Removed {guess}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not entirely letters."
         )
     elif not words:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not found in dictionary. Removed {guess}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"{guess} not found in dictionary."
         )
     
     valid_guess = ""
     for word in words:
         valid_guess = word['word']
-    return {"response": f"Valid guess. Added {valid_guess} to check against answer"}
+    return {"response": f"{valid_guess} is valid"}
+
+@app.post("/add_guess", status_code=status.HTTP_201_CREATED)
+def add_word(
+    guess: str,
+    db: sqlite3.Connection = Depends(get_db)
+):
+    try:
+        cur =  db.execute("INSERT INTO words(word) VALUES(?)", [guess])
+        db.commit()
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
+
+    new_word_id = cur.lastrowid
+    return {"id": f"{new_word_id}", "word": f"{guess}"}
+
+@app.delete("/remove_guess")
+def remove_word(
+    guess: str,
+    db: sqlite3.Connection = Depends(get_db)
+):
+    cur = db.execute("SELECT * FROM words WHERE word = ? LIMIT 1", [guess])
+    words = cur.fetchall()
+
+    if not words:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Word not found"
+        )
+
+    cur =  db.execute("DELETE FROM words WHERE word = ?", [guess])
+    db.commit()
+    return {"response": f"Successfully removed {guess}"}
