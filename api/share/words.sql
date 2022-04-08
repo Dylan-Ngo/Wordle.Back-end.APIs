@@ -3,7 +3,8 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS words;
 CREATE TABLE words (
 	id INTEGER primary key,
-	word VARCHAR
+	word VARCHAR,
+	UNIQUE(word)
 );
 INSERT INTO words(word) VALUES('abaci');
 INSERT INTO words(word) VALUES('aback');
